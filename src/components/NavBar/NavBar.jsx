@@ -10,17 +10,6 @@ import { authContext } from '../../ConText/AuthContextProvider';
 import { CartContext } from '../../ConText/CartContextProvider';
 
 
-
-
-// const navigation = [
-//   { name: 'Dashboard', href: '#', current: true },
-//   { name: 'Team', href: '#', current: false },
-//   { name: 'Projects', href: '#', current: false },
-//   { name: 'Calendar', href: '#', current: false },
-// ]
-// function classNames(...classes) {
-//   return classes.filter(Boolean).join(' ')
-// }
 export default function NavBar() {
     let {totalItems } = useContext(CartContext)
     let {token ,setToken, name ,setName} = useContext(authContext)
@@ -128,10 +117,10 @@ const [wishlistCount, setWishlistCount] = useState(1);
               <ShoppingCartIcon className="w-6 h-6" />
               Cart
               {totalItems > 0 ? (
-              <span className="absolute -top-2 -right-2 bg-green-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+              <span className="absolute -top-2 right-6 bg-green-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                 {totalItems}
               </span>
-            ) :   <span className="absolute -top-2 -right-2 bg-green-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+            ) :   <span className="absolute top-2 -right-6 bg-green-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                 0
               </span>}
             </Link>

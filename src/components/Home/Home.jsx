@@ -12,11 +12,11 @@ import { Link } from 'react-router-dom'
 import { CartContext } from '../../ConText/CartContextProvider'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import UseTitle from '../UseTitle/UseTitle'
  
 export default function Home() {
     let {addToCart} = useContext(CartContext)
-    
-    
+     UseTitle('Product');
     
     let [searchType , setSearchType] = useState("Search By Title")
     const [query, setQuery] = useState("");
@@ -82,7 +82,7 @@ export default function Home() {
                 <div>
                     <select value={searchType} 
                         onChange={(e) => setSearchType(e.target.value)} 
-                        id="list" className="w-full outline-[#6366F1] border-3 border-[#6366F1] rounded-lg h-11 px-3 text-[#6366F1] font-semibold text-lg" >
+                        id="list" className="w-full outline-[#6366F1] border-3 border-[#6366F1] rounded-lg h-11 px-3 text-[#6366F1] font-semibold text-xs md:text-lg" >
                         <option value="Search By Title">Search By Title</option>
                         <option value="Search By Category">Search By Category</option>
                     </select>
@@ -94,7 +94,7 @@ export default function Home() {
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         placeholder={getPlaceholder()}
-                        className="w-full outline-[#6366F1] border-3 border-[#6366F1] rounded-lg h-11 px-3 text-[#6366F1] font-semibold text-lg"
+                        className="w-full outline-[#6366F1] border-3 border-[#6366F1] rounded-lg h-11 px-3 text-[#6366F1] font-semibold text-xs md:text-lg"
                     />
                 </div>
             </div>

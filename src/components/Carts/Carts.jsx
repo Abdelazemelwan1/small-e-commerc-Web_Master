@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom';
 import { FaOpencart } from 'react-icons/fa';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import UseTitle from '../UseTitle/UseTitle';
 
 export default function Carts() {
+     UseTitle(' Cart');
     // let {cart} = useContext(CartContext)
 
      const { cart, addToCart, decreaseQty, removeFromCart ,clearCart ,totalItems , totalPrice} =
@@ -19,10 +21,6 @@ export default function Carts() {
     }, [])
     return (
         <>
-
-
-
-
 
 <div className="min-h-[50vh] bg-gray-100  p-4 rela tive rounded-3xl gap-3">
 <div className='flex items-center justify-between'>
@@ -38,7 +36,7 @@ export default function Carts() {
         <div className="space-y-4">
 
             {cart.map((item)=>
-            <div className="flex items-center flex-col md:flex-row gap-4 p-4 bg-gray-50 rounded-lg">
+            <div key={item.id} className="flex items-center flex-col md:flex-row gap-4 p-4 bg-gray-50 rounded-lg">
                 <div className='flex gap-4'>
 
                     <img src={item.image} alt="Product" className="w-20  object-cover rounded-md" />

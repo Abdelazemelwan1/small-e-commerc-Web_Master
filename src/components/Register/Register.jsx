@@ -9,13 +9,10 @@ import { BarLoader } from 'react-spinners';
 import toast from 'react-hot-toast';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-// import { authContext } from '../../ConText/AuthContextProvider';
 
 
 export default function Register() {
-        // let {setToken ,setName } = useContext(authContext)
     
-    // const [massageError, setMassageError] = useState(null)
     const [islooding, setIslooding] = useState(false)
     let navigate =useNavigate()
 
@@ -27,10 +24,6 @@ export default function Register() {
         .then((res)=>{
             console.log(res);
             toast.success(res.data.message)
-            // setToken(res.data.token)
-            // localStorage.setItem("token" ,res.data.token )
-            // setName(res.data.user.name)
-            // localStorage.setItem("name" ,res.data.user.name)
             setTimeout(() => {
                 navigate("/Login")
             }, 1500);
@@ -77,7 +70,6 @@ export default function Register() {
 
     return (
         <>
-        {/* {massageError ? <h2 className='text-center p-2 bg-amber-300 w-fit rounded-2xl px-4 m-auto'>{massageError}</h2> : null } */}
            <div className="bg-white relative ">
   <div className="flex flex-col items-center justify-between pt-0 md:pr-10 pb-0 md:pl-10 mt-0 mr-auto mb-0 ml-auto max-w-7xl xl:px-5 lg:flex-row">
     <div className="flex flex-col items-center   pt-5 md:pr-10 pb-15 md:pl-10 lg:pt-15 lg:flex-row">
@@ -100,11 +92,6 @@ export default function Register() {
                             name='name'
                             value={registerFormik.values.name}
                             onChange={registerFormik.handleChange}
-                            // onChange={(e)=>{
-                            //     registerFormik.handleChange(e)
-                            //     setName(e.target.value)
-                            //     // localStorage.setItem("name" , e.target.value)
-                            // }}
                             onBlur={registerFormik.handleBlur}
                             placeholder="Enter Username" type="text" className="border placeholder-gray-400 focus:outline-none focus:border-[#6366F1] w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md" />
                         {registerFormik.errors.name && registerFormik.touched.name ? <h2 className='text-red-700 px-2 flex items-center gap-1'><span>*</span> {registerFormik.errors.name}</h2> : null }

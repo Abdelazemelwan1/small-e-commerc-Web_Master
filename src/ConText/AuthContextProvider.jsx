@@ -6,20 +6,6 @@ export default function AuthContextProvider({children}) {
     const [token, setToken] = useState(localStorage.getItem("token"))
     const [name, setName] = useState(localStorage.getItem("name"))
 
-
-    // useEffect(() => {
-    //     if (localStorage.getItem("token")) {
-    //         setToken(localStorage.getItem("token"))
-    //     }
-     
-    // }, [])
-    
-    // useEffect(() => {
-       
-    //     if (localStorage.getItem("name")) {
-    //         setToken(localStorage.getItem("name"))
-    //     }
-    // }, [])
     
   return (
     <>
