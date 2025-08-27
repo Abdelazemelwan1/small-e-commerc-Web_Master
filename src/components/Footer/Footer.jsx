@@ -7,7 +7,7 @@ export default function Footer() {
 
     return (
         <>
-            <div className='w-full bg-[#6A7282] py-5   text-white '>
+            <div className='w-full bg-[#6A7282] dark:bg-gray-600 py-5 dark:text-gray-400  text-white '>
                 <div className="justify-items-center md:justify-items-start grid grid-cols-1 md:grid-cols-2 gap-5  container max-w-[90%]  mb-6 sm:max-w-[36rem] md:max-w-[45rem] lg:max-w-[62rem]  xl:max-w-[74rem]  2xl:max-w-[88rem]  mx-auto">
                 
                     <div>

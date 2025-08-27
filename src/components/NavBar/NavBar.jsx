@@ -8,6 +8,8 @@ import GoogleLogo from './../../assets/png-transparent-technion-israel-institute
 import { Link } from 'react-router-dom';
 import { authContext } from '../../ConText/AuthContextProvider';
 import { CartContext } from '../../ConText/CartContextProvider';
+import { CiLight } from 'react-icons/ci';
+import { MdDarkMode } from 'react-icons/md';
 
 
 export default function NavBar() {
@@ -15,7 +17,6 @@ export default function NavBar() {
     let {token ,setToken, name ,setName} = useContext(authContext)
   const [isOpen, setIsOpen] = useState(false);
 const [wishlistCount, setWishlistCount] = useState(1);
-  // const [cartCount, setCartCount] = useState(15);
     const [menuOpen, setMenuOpen] = useState(false); // المينيو في الموبايل
 
     function logout() {
@@ -25,23 +26,36 @@ const [wishlistCount, setWishlistCount] = useState(1);
         localStorage.removeItem("name")
 
     }
-    
+
+    let [isDarkMode , setIsDarkMode] = useState(localStorage.getItem("theme") === "dark")
+
+
+    useEffect(()=>{
+      if (isDarkMode) {
+        document.documentElement.classList.add("dark");
+        localStorage.setItem("theme" , "dark")
+      }else{
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("theme" , "light")
+      }
+    },[isDarkMode])
 
 
     return (
         <>
 
-          <nav className="bg-gray-500 text-white px-6 py-4 flex items-center justify-between z-50  fixed top-0 left-0 ring-0 w-full">
+          <nav className="bg-gray-500 dark:bg-[#364153] text-white px-6 py-4 flex items-center justify-between z-50  fixed top-0 left-0 ring-0 w-full">
       {/* الشمال: Logo */}
-      <Link to={"/"} className="text-3xl font-bold  tracking-[1px] text-[#6366F1]">TEC</Link>
+      <Link to={"/"} className="text-3xl font-bold  tracking-[1px] dark:text-[#6366F1] ">TEC</Link>
 
       {/* النص في النص (متمركز في النص بالظبط) */}
-      {token ?   <div className="absolute left-1/2 transform -translate-x-1/2 text-lg font-semibold capitalize"> {localStorage.getItem("name") ? "Welcom" +" " + name : null}</div> : null}
+      {token ?   <div className=" absolute left-1/2 transform -translate-x-1/2 text-lg font-semibold capitalize"> {localStorage.getItem("name") ? "Welcom" +" " + name : null}</div> : null}
     
 
       {/* اليمين: أيقونات أو زرار المينيو */}
       <div className="flex items-center gap-4">
         {/* للـ Desktop */}
+          <button onClick={()=> setIsDarkMode(!isDarkMode)} className='cursor-pointer'>{isDarkMode ?<CiLight className='text-3xl md:text-4xl' />: <MdDarkMode  className='text-3xl md:text-4xl' />}</button>
         <div className="hidden md:flex items-center gap-6">
           {token && <>
           {/* Wishlist */}
@@ -98,13 +112,13 @@ const [wishlistCount, setWishlistCount] = useState(1);
 
       {/* المينيو بتاعة الموبايل */}
       {menuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-white text-black shadow-lg rounded-md md:hidden z-50">
+        <div className="absolute top-16 left-0 w-full bg-white dark:bg-gray-700 dark:text-white text-black shadow-lg rounded-md md:hidden z-50">
           <ul className="flex flex-col gap-2 p-4">
             {/* <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer font-semibold">
               هلو أبد العظيم
             </li> */}
             {token && <>
-            <li className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer relative">
+            <li className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer relative dark:hover:bg-gray-800 rounded-2xl duration-300">
               <HeartIcon className="w-6 h-6" />
               Wishlist
               {wishlistCount > 0 && (
@@ -113,21 +127,21 @@ const [wishlistCount, setWishlistCount] = useState(1);
                 </span>
               )}
             </li>
-            <Link to={"/carts"} className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer relative">
+            <Link to={"/carts"} className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer relative dark:hover:bg-gray-800 rounded-2xl duration-300">
               <ShoppingCartIcon className="w-6 h-6" />
               Cart
               {totalItems > 0 ? (
-              <span className="absolute -top-2 right-6 bg-green-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+              <span className="absolute top-2 right-6 bg-green-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                 {totalItems}
               </span>
-            ) :   <span className="absolute top-2 -right-6 bg-green-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+            ) :   <span className="absolute top-6 -right-6 bg-green-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                 0
               </span>}
             </Link>
 </>}
-            {token ? <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer"><Link onClick={()=>logout()} to={"/Login"}>Logout</Link></li> : <>
-            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer"><Link to={"/Login"}>Login</Link></li>
-            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer"><Link to={"/Register"}>Register</Link></li>
+            {token ? <li className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-2xl duration-300 cursor-pointer"><Link onClick={()=>logout()} to={"/Login"}>Logout</Link></li> : <>
+            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-800 rounded-2xl duration-300"><Link to={"/Login"}>Login</Link></li>
+            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-800 rounded-2xl duration-300"><Link to={"/Register"}>Register</Link></li>
             </>}
             
           </ul>

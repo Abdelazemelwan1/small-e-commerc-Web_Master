@@ -9,7 +9,7 @@ export default function Layout() {
     return (
         <>
             <NavBar />
-            <div className="container max-w-[90%]  mb-6 sm:max-w-[36rem] md:max-w-[45rem] lg:max-w-[62rem]  xl:max-w-[74rem]  2xl:max-w-[88rem]  mx-auto mt-[100px]">
+            <div className="overflow-hidden container max-w-[90%]  mb-6 sm:max-w-[36rem] md:max-w-[45rem] lg:max-w-[62rem]  xl:max-w-[74rem]  2xl:max-w-[88rem]  mx-auto mt-[100px]">
                 <Outlet />
             </div>
             <Footer />

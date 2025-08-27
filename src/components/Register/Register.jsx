@@ -17,19 +17,16 @@ export default function Register() {
     let navigate =useNavigate()
 
      function handleRegister(values) {
-        console.log(values);
         setIslooding(true)
         let lodingToast = toast.loading("loading....")
          axios.post("https://ecommerce.routemisr.com/api/v1/auth/signup" , values)
         .then((res)=>{
-            console.log(res);
             toast.success(res.data.message)
             setTimeout(() => {
                 navigate("/Login")
             }, 1500);
             
         }).catch((erroe)=>{
-            console.log(erroe);
             toast.error(erroe.response.data.message)
             
         }).finally(()=>{
@@ -43,7 +40,7 @@ export default function Register() {
 
 
     let validationSchema = YUP.object().shape({
-           name: YUP.string().min(3, "name min 3 char").max(10, "name max 10 char").required("name is required"),
+           name: YUP.string().min(3, "name min 3 char").max(15, "name max 15 char").required("name is required"),
             email:YUP.string().email("email is in-valid").required("email is required"),
             password:YUP.string().matches(/^\w{8,15}$/ , "password min 8 to 15 letters").required("password is required"),
             rePassword:YUP.string().oneOf([YUP.ref("password")] , "password and repassword dont match").required("rePassword is required"),
@@ -70,78 +67,78 @@ export default function Register() {
 
     return (
         <>
-           <div className="bg-white relative ">
+           <div className="bg-white dark:bg-gray-900 relative rounded-2xl ">
   <div className="flex flex-col items-center justify-between pt-0 md:pr-10 pb-0 md:pl-10 mt-0 mr-auto mb-0 ml-auto max-w-7xl xl:px-5 lg:flex-row">
-    <div className="flex flex-col items-center   pt-5 md:pr-10 pb-15 md:pl-10 lg:pt-15 lg:flex-row">
-      <div data-aos="fade-right" className="w-full bg-cover relative max-w-md lg:max-w-2xl lg:w-6/12">
-        <div className="flex flex-col items-center justify-center w-full h-full relative lg:pr-10">
+    <div className="w-[92%] md:w-full flex flex-col items-center   pt-5 md:pr-10 pb-15 md:pl-10 lg:pt-15 lg:flex-row">
+      <div data-aos="fade-right" className="dark:bg-gray-900  w-full bg-cover relative max-w-md lg:max-w-2xl lg:w-6/12">
+        <div className="dark:bg-gray-900  flex flex-col items-center justify-center w-full h-full relative lg:pr-10">
           <img src="https://res.cloudinary.com/macxenon/image/upload/v1631570592/Run_-_Health_qcghbu.png" className="btn-" />
         </div>
       </div>
 
 
 
-            <form data-aos="fade-left" onSubmit={registerFormik.handleSubmit}  className="w-full mt-20 mr-0 mb-0 ml-0 relative z-10 max-w-2xl lg:mt-0 lg:w-6/12">
-                <div className="flex flex-col items-start justify-start pt-10 pr-10 pb-10 pl-10 bg-white shadow-2xl rounded-xl relative z-10">
+            <form data-aos="fade-left" onSubmit={registerFormik.handleSubmit}  className=" w-full mt-20 mr-0 mb-0 ml-0 relative z-10 max-w-2xl lg:mt-0 lg:w-6/12">
+                <div className="dark:bg-gray-800  flex flex-col items-start justify-start pt-10 pr-10 pb-10 pl-10 bg-white shadow-2xl rounded-xl relative z-10">
                     <p className="w-full text-2xl md:text-3xl  md:font-medium text-center leading-snug font-serif text-[#6366F1] flex items-center gap-2"> <FaRegIdBadge />Create Account Now :</p>
                     <div className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-6">
 
                         <div className="relative">
-                        <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">Username</p>
+                        <p className="dark:bg-gray-900 rounded-3xl dark:text-white  bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">Username</p>
                         <input
                             name='name'
                             value={registerFormik.values.name}
                             onChange={registerFormik.handleChange}
                             onBlur={registerFormik.handleBlur}
-                            placeholder="Enter Username" type="text" className="border placeholder-gray-400 focus:outline-none focus:border-[#6366F1] w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md" />
-                        {registerFormik.errors.name && registerFormik.touched.name ? <h2 className='text-red-700 px-2 flex items-center gap-1'><span>*</span> {registerFormik.errors.name}</h2> : null }
+                            placeholder="Enter Username" type="text" className="dark:bg-gray-900 dark:border-none dark:text-white border placeholder-gray-400 focus:outline-none focus:border-[#6366F1] w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md" />
+                        {registerFormik.errors.name && registerFormik.touched.name ? <h2 className='dark:text-red-500 text-red-700 px-2 flex items-center gap-1'><span>*</span> {registerFormik.errors.name}</h2> : null }
                         </div>
                         <div className="relative">
-                        <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">Email</p>
+                        <p className="dark:bg-gray-900 rounded-3xl dark:text-white bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">Email</p>
                         <input 
                             name='email'
                             value={registerFormik.values.email}
                             onChange={registerFormik.handleChange}
                             onBlur={registerFormik.handleBlur}
-                            placeholder="Enter Email" type="email" className="border placeholder-gray-400 focus:outline-none focus:border-[#6366F1] w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md" />
-                        {registerFormik.errors.email && registerFormik.touched.email ? <h2 className='text-red-700 px-2 flex items-center gap-1'><span>*</span>{registerFormik.errors.email}</h2> : null }
+                            placeholder="Enter Email" type="email" className="dark:bg-gray-900 dark:border-none dark:text-white border placeholder-gray-400 focus:outline-none focus:border-[#6366F1] w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md" />
+                        {registerFormik.errors.email && registerFormik.touched.email ? <h2 className='dark:text-red-500 text-red-700 px-2 flex items-center gap-1'><span>*</span>{registerFormik.errors.email}</h2> : null }
                         </div>
                         <div className="relative">
-                        <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">Password</p>
+                        <p className="dark:bg-gray-900 rounded-3xl dark:text-white  bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">Password</p>
                         <input 
                             name='password'
                             value={registerFormik.values.password}
                             onChange={registerFormik.handleChange}
                             onBlur={registerFormik.handleBlur}
-                            placeholder="Enter Password" type="password" className="border placeholder-gray-400 focus:outline-none focus:border-[#6366F1] w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md" />
-                        {registerFormik.errors.password && registerFormik.touched.password ? <h2 className='text-red-700 px-2 flex items-center gap-1 '><span>*</span>{registerFormik.errors.password}</h2> : null }
+                            placeholder="Enter Password" type="password" className="dark:bg-gray-900 dark:border-none dark:text-white border placeholder-gray-400 focus:outline-none focus:border-[#6366F1] w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md" />
+                        {registerFormik.errors.password && registerFormik.touched.password ? <h2 className='dark:text-red-500 text-red-700 px-2 flex items-center gap-1 '><span>*</span>{registerFormik.errors.password}</h2> : null }
                         </div>
 
                         <div className="relative">
-                        <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">rePassword</p>
+                        <p className="dark:bg-gray-900 rounded-3xl dark:text-white bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">rePassword</p>
                         <input 
                             name='rePassword'
                             value={registerFormik.values.rePassword}
                             onChange={registerFormik.handleChange}
                             onBlur={registerFormik.handleBlur}
-                            placeholder="Enter rePassword" type="password" className="border placeholder-gray-400 focus:outline-none focus:border-[#6366F1] w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md" />
-                        {registerFormik.errors.rePassword && registerFormik.touched.rePassword ? <h2 className='text-red-700 px-2 flex items-center gap-1'><span>*</span>{registerFormik.errors.rePassword}</h2> : null }
+                            placeholder="Enter rePassword" type="password" className="dark:bg-gray-900 dark:border-none dark:text-white border placeholder-gray-400 focus:outline-none focus:border-[#6366F1] w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md" />
+                        {registerFormik.errors.rePassword && registerFormik.touched.rePassword ? <h2 className='dark:text-red-500 text-red-700 px-2 flex items-center gap-1'><span>*</span>{registerFormik.errors.rePassword}</h2> : null }
                         </div>
                         <div className="relative">
-                        <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">Phone</p>
+                        <p className="dark:bg-gray-900 rounded-3xl dark:text-white  bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">Phone</p>
                         <input 
                             name='phone'
                             value={registerFormik.values.phone}
                             onChange={registerFormik.handleChange}
                             onBlur={registerFormik.handleBlur}
-                            placeholder="Enter phone" type="tel" className="border placeholder-gray-400 focus:outline-none focus:border-[#6366F1] w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md" />
-                        {registerFormik.errors.phone && registerFormik.touched.phone ? <h2 className='text-red-700 px-2 flex items-center gap-1'><span>*</span>{registerFormik.errors.phone}</h2> : null }
+                            placeholder="Enter phone" type="tel" className="dark:bg-gray-900 dark:border-none dark:text-white border placeholder-gray-400 focus:outline-none focus:border-[#6366F1] w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md" />
+                        {registerFormik.errors.phone && registerFormik.touched.phone ? <h2 className='dark:text-red-500 text-red-700 px-2 flex items-center gap-1'><span>*</span>{registerFormik.errors.phone}</h2> : null }
                         </div>
                         <div className="relative">
                             <button disabled={islooding ? true : false}  type='submit' className="cursor-pointer w-full inline-block pt-4 pr-5 pb-4 pl-5 text-xl font-medium text-center text-white bg-indigo-500 rounded-lg transition duration-200 hover:bg-indigo-600 ease">
                                 {islooding ? <BarLoader />:"Register"}
                             </button>
-                            <p className='text-center text-sm md:text-[16px] capitalize mt-3'>Login to your existing account :<Link className="text-[#6366F1] hover:text-[#0d10c5] capitalize" to="/Login"> sing in</Link></p>
+                            <p className='text-center text-sm md:text-[16px] capitalize mt-3 dark:text-white ' >Login to your existing account :<Link className="text-[#6366F1] hover:text-[#0d10c5] capitalize dark:hover:text-white" to="/Login"> sing in</Link></p>
                         </div>
 
                     </div>
